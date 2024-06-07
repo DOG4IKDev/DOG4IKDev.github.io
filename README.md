@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>EshkereCoin</title>
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="root/style.css">
   <style>
     body {
       text-align: center;
