@@ -67,7 +67,7 @@
   <div id="shop">
     <h2>Shop</h2>
     <div class="shop-item" onclick="buyItem(this, 1000, 1, 2)">
-      <img src="item1.png" alt="Товар 1">
+      <img src="https://camo.githubusercontent.com/3dc32273f8e4e28fcbb24de498c1808a9926e1fb9857ffd496985584141d8992/68747470733a2f2f74722e72627863646e2e636f6d2f62626366363135353761636562353639613839393430336562646561613434332f3432302f3432302f496d6167652f506e67" alt="Товар 1">
       <p>Цена: 1000</p>
     </div>
     <div class="shop-item" onclick="buyItem(this, 5000, 1, 2)">
