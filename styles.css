@@ -1,0 +1,83 @@
+body {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 20px;
+}
+
+#coin {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+#coin:active {
+  transform: scale(0.9);
+}
+
+.shop-item {
+  display: inline-block;
+  margin: 10px;
+  border-radius: 10%;
+  /* Делаем элементы круглыми */
+  border: 2px solid #0000FF;
+  background-color: #ADD8E6;
+  padding: 20px;
+  /* Увеличиваем отступ для круглой формы */
+  transition: transform 0.1s ease;
+  width: 120px;
+  /* Задаем фиксированный размер для круглых элементов */
+  height: 120px;
+  /* Задаем фиксированный размер для круглых элементов */
+  position: relative;
+  /* Для позиционирования цены внутри элемента */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  /* Добавляем тень */
+}
+
+.shop-item:active {
+  transform: scale(0.9);
+}
+
+.shop-item.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.shop-item img {
+  width: 80px;
+  /* Уменьшаем размер изображения, чтобы поместилось в круг */
+  height: 80px;
+  /* Уменьшаем размер изображения, чтобы поместилось в круг */
+  border-radius: 0%;
+  /* Делаем изображения круглыми */
+}
+
+.shop-item p {
+  position: absolute;
+  /* Абсолютное позиционирование цены */
+  bottom: 10px;
+  /* Располагаем цену внизу элемента */
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#shop {
+  margin-top: 20px;
+  display: inline-block;
+  /* Центрируем магазин */
+  border-radius: 10%;
+  /* Делаем магазин круглым */
+  padding: 30px;
+  /* Добавляем отступ внутри магазина */
+  background-color: #fff;
+  /* Фон магазина белый для контраста */
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  /* Добавляем тень для объема */
+}
+
+h1,
+h2 {
+  color: #333;
+}
