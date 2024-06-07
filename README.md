@@ -61,7 +61,7 @@
 
 <body>
   <h1>Кликер Монет</h1>
-  <img id="coin" src="https://tr.rbxcdn.com/bbcf61557aceb569a899403ebdeaa443/420/420/Image/Png" alt="Монета">
+  <img id="coin" src="https://camo.githubusercontent.com/3dc32273f8e4e28fcbb24de498c1808a9926e1fb9857ffd496985584141d8992/68747470733a2f2f74722e72627863646e2e636f6d2f62626366363135353761636562353639613839393430336562646561613434332f3432302f3432302f496d6167652f506e67" alt="Монета">
   <p>Монет: <span id="coin-count">0</span></p>
 
   <div id="shop">
