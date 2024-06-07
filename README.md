@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>EshkereCoin</title>
-  <link rel="stylesheet" href="root/style.css">
+<link rel="stylesheet" href="style.css">
   <style>
     body {
       text-align: center;
@@ -61,7 +61,7 @@
 
 <body>
   <h1>Кликер Монет</h1>
-  <img id="coin" src="https://cdn.discordapp.com/attachments/1245065609742647501/1247977870324928552/Png-min_1.png?ex=6661fd76&is=6660abf6&hm=a72f41ad53d0054bd977e74b57ec7ec0155f5bf2f1982cc3145a1041af8a3c95&" alt="Монета">
+  <img id="coin" src="https://tr.rbxcdn.com/bbcf61557aceb569a899403ebdeaa443/420/420/Image/Png" alt="Монета">
   <p>Монет: <span id="coin-count">0</span></p>
 
   <div id="shop">
