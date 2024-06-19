@@ -1,137 +1,112 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-  <meta charset="UTF-8">
-  <title>EshkereCoin</title>
-<link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      text-align: center;
-      font-family: 'Arial', sans-serif;
-      background-color: #f7f7f7;
-      margin: 0;
-      padding: 20px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кликер с Магазином</title>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
     }
-
-    #coin {
-      cursor: pointer;
-      transition: transform 0.1s ease;
+    #app {
+        text-align: center;
     }
-
-    #coin:active {
-      transform: scale(0.9);
+    .button {
+        background-color: #4CAF50; 
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
     }
-
-    .shop-item {
-      display: inline-block;
-      margin: 10px;
-      border-radius: 15px;
-      border: 2px solid #0000FF;
-      background-color: #ADD8E6;
-      padding: 5px;
-      transition: transform 0.1s ease;
+    /* Табы для переключения между игрой и магазином */
+    .tab-content {
+        display: none;
+        animation: fadeInAnimation ease 1s;
     }
-
-    .shop-item:active {
-      transform: scale(0.9);
+    .tab-content.active {
+        display: block;
     }
-
-    .shop-item.disabled {
-      opacity: 0.5;
-      pointer-events: none;
+    @keyframes fadeInAnimation {
+        from {opacity: 0;}
+        to {opacity: 1;}
     }
-
-    .shop-item img {
-      width: 100px;
-      height: 100px;
-      border-radius: 15px;
+    img {
+        height: 100px;
+        cursor: pointer;
     }
-
-    #shop {
-      margin-top: 20px;
-    }
-
-    h1,
-    h2 {
-      color: #333;
-    }
-  </style>
+</style>
 </head>
-
 <body>
-  <h1>Кликер Монет</h1>
-  <img id="coin" src="https://camo.githubusercontent.com/3dc32273f8e4e28fcbb24de498c1808a9926e1fb9857ffd496985584141d8992/68747470733a2f2f74722e72627863646e2e636f6d2f62626366363135353761636562353639613839393430336562646561613434332f3432302f3432302f496d6167652f506e67" alt="Монета">
-  <p>Монет: <span id="coin-count">0</span></p>
-
-  <div id="shop">
-    <h2>Shop</h2>
-    <div class="shop-item" onclick="buyItem(this, 1000, 1, 2)">
-      <img src="https://avatars.mds.yandex.net/get-shedevrum/11425623/c4c66485c47111eeb3277ab0f2fccf97/orig" alt="Товар 1">
-      <p>Цена: 1000</p>
+<div id="app">
+    <!-- Вкладка игры -->
+    <div id="game-tab" class="tab-content active">
+        <img src="coin.png" alt="Coin" onclick="addCoin()">
+        <p><strong>Монеты:</strong> <span id="coins">0</span></p>
+        <button class="button" onclick="showTab('shop')">Перейти в Магазин</button>
     </div>
-    <div class="shop-item" onclick="buyItem(this, 5000, 1, 2)">
-      <img src="item2.png" alt="Товар 2">
-      <p>Цена: 5000</p>
+    <!-- Вкладка магазина -->
+    <div id="shop-tab" class="tab-content">
+        <!-- Товары магазина будут добавлены здесь -->
+        <button class="button" onclick="showTab('game')">Вернуться к Игре</button>
     </div>
-    <div class="shop-item" onclick="buyItem(this, 10000, 1, 2)">
-      <img src="item3.png" alt="Товар 3">
-      <p>Цена: 10000</p>
-    </div>
-    <div class="shop-item" onclick="buyItem(this, 50000, 1, 2)">
-      <img src="item4.png" alt="Товар 4">
-      <p>Цена: 50000</p>
-    </div>
-  </div>
+</div>
+<script>
+let coins = 0;
+let upgrades = [
+    {cost: 10, increase: 1, level: 0},
+    {cost: 30, increase: 2, level: 0},
+    {cost: 90, increase: 3, level: 0},
+    {cost: 270, increase: 5, level: 0}
+];
 
-  <script>
-    let coins = parseInt(localStorage.getItem('coins')) || 0;
-let incomeRate = parseInt(localStorage.getItem('incomeRate')) || 0;
-let clickRate = parseInt(localStorage.getItem('clickRate')) || 1;
-
-document.getElementById('coin-count').textContent = coins;
-
-document.getElementById('coin').addEventListener('click', () => {
-  coins += clickRate;
-  updateCoins();
-});
-
-function buyItem(element, price, income, bonusClick) {
-  if (coins >= price && !element.classList.contains('disabled')) {
-    coins -= price;
-    incomeRate += income;
-    clickRate += bonusClick;
-    element.classList.add('disabled');
-    updateCoins();
-    localStorage.setItem(element.querySelector('img').alt, 'purchased');
-    localStorage.setItem('incomeRate', incomeRate);
-    localStorage.setItem('clickRate', clickRate);
-  }
+function addCoin() {
+    coins++;
+    upgrades.forEach(upgrade => {
+        coins += upgrade.increase * upgrade.level;
+    });
+    updateDisplay();
 }
 
-function updateCoins() {
-  document.getElementById('coin-count').textContent = coins;
-  localStorage.setItem('coins', coins);
-}
-
-setInterval(() => {
-  coins += incomeRate;
-  updateCoins();
-}, 1000);
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.shop-item').forEach(item => {
-    let itemName = item.querySelector('img').alt;
-    if (localStorage.getItem(itemName) === 'purchased') {
-      item.classList.add('disabled');
-      incomeRate += 1;
-      clickRate += 2;
+function buyUpgrade(index) {
+    if (coins >= upgrades[index].cost && upgrades[index].level < 3) {
+        coins -= upgrades[index].cost;
+        upgrades[index].cost *= 3;
+        upgrades[index].level++;
+        updateDisplay();
     }
-  });
-  localStorage.setItem('incomeRate', incomeRate);
-  localStorage.setItem('clickRate', clickRate);
-});
-  </script>
-</body>
+}
 
+function updateDisplay() {
+    document.getElementById('coins').textContent = coins;
+    let shopTab = document.getElementById('shop-tab');
+    shopTab.innerHTML = '<button class="button" onclick="showTab(\'game\')">Вернуться к Игре</button>';
+    upgrades.forEach((upgrade, index) => {
+        let upgradeElement = document.createElement('div');
+        upgradeElement.innerHTML = `<img src="upgrade.png" alt="Upgrade"><p>Уровень: ${upgrade.level} - Цена: ${upgrade.cost}</p><button class="button" onclick="buyUpgrade(${index})">Купить Улучшение</button>`;
+        shopTab.insertBefore(upgradeElement, shopTab.firstChild);
+    });
+}
+
+function showTab(tabName) {
+    let tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.getElementById(tabName + '-tab').classList.add('active');
+}
+
+updateDisplay();
+</script>
+</body>
 </html>
